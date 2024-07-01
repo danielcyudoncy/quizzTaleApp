@@ -1,3 +1,5 @@
 class AppImages {
-  static const String background = "assets/images/svgs/project_bg.svg";
+  //app Images
+  static const String projectPhase = "assets/images/project_phase.png";
+  static const String splashImage = "assets/icons/quizztale-logo.jpg";
 }

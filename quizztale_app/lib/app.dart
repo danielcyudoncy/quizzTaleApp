@@ -1,17 +1,17 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:quizztale_app/homepage.dart';
+import 'package:quizztale_app/screens/splash_screen.dart';
+
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
+    return const GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'appName',
-      theme: ThemeData(),
-      home: const Homepage(),
+      title: 'QuizzTale',
+      home: SplashScreen(),
     );
   }
 }
