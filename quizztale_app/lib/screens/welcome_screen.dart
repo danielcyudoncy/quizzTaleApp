@@ -31,7 +31,7 @@ class WelcomeScreen extends StatelessWidget {
                 style: TextStyle(
                     fontSize: 32,
                     fontWeight: FontWeight.bold,
-                    color: Color.fromARGB(255, 192, 146, 8)),
+                    color: Color.fromARGB(255, 55, 9, 141)),
               ),
             ),
             SizedBox(
@@ -52,8 +52,8 @@ class WelcomeScreen extends StatelessWidget {
             ),
             AppPrimaryButton(
               buttonText: "Let's start >>>",
-              buttonColor: Color.fromARGB(255, 192, 146, 8),
-              textColor: Colors.white,
+              buttonColor: Color.fromARGB(255, 55, 9, 141),
+              textColor: Colors.white, 
             )
           ],
         ),
