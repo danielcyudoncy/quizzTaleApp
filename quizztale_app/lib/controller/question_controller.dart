@@ -1,7 +1,7 @@
 import 'dart:async';
-
 import 'package:get/get.dart';
 import 'package:quizztale_app/data/question_model.dart';
+import 'package:quizztale_app/routes/routes.dart';
 
 class QuestionController extends GetxController {
   String name = '';
@@ -96,4 +96,19 @@ class QuestionController extends GetxController {
   void stopTimer() => _timer?.cancel();
   
   void nextQuestion() {}
+
+  void resetAnswer() {
+    for (var element in _questionList) {
+      _questionIsAnswered.addAll({element.id: false});
+      update();
+    }
+  }
+
+  void startAgain() {
+    _correctAnswer = null;
+    _countOfCorrectAnswers = 0;
+    resetAnswer();
+    _selectedAnswer = null;
+    Get.offAllNamed(Routes.welcomeScreenRoute);
+  }
 }

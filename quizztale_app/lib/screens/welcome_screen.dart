@@ -5,26 +5,32 @@ import 'package:quizztale_app/utils/widgets/app_primary_button.dart';
 
 
 
-class WelcomeScreen extends StatelessWidget {
+class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});
 
+  @override
+  State<WelcomeScreen> createState() => _WelcomeScreenState();
+}
+
+class _WelcomeScreenState extends State<WelcomeScreen> {
+  final GlobalKey<FormState> _formKey = GlobalKey();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
         margin: const EdgeInsets.all(16),
-        child: const Column(
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Align(
+            const Align(
               alignment: Alignment.center,
               child: Text(
                 'Welcome to',
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
               ),
             ),
-            Align(
+            const Align(
               alignment: Alignment.center,
               child: Text(
                 'QuizTale',
@@ -34,23 +40,23 @@ class WelcomeScreen extends StatelessWidget {
                     color: Color.fromARGB(255, 55, 9, 141)),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: AppSizes.spaceBtwSectionsLg,
             ),
-            Text(
+            const Text(
               'Choose Username',
               style: TextStyle(fontSize: 14, fontWeight: FontWeight.normal),
             ),
-            SizedBox(
+            const SizedBox(
               height: AppSizes.spaceBtwItems,
             ),
-            TextField(
-              decoration: InputDecoration(border: OutlineInputBorder()),
-            ),
-            SizedBox(
+            Form(
+              key: _formKey,
+              child: child,)
+            const SizedBox(
               height: AppSizes.spaceBtwSectionsMd,
             ),
-            AppPrimaryButton(
+            const AppPrimaryButton(
               buttonText: "Let's start >>>",
               buttonColor: Color.fromARGB(255, 55, 9, 141),
               textColor: Colors.white, 
