@@ -1,10 +1,12 @@
 import 'dart:async';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quizztale_app/data/question_model.dart';
 import 'package:quizztale_app/routes/routes.dart';
 
 class QuestionController extends GetxController {
   String name = '';
+  var nameController = TextEditingController();
   final List<QuestionModel> _questionList = [
     QuestionModel(
       id: 1,
