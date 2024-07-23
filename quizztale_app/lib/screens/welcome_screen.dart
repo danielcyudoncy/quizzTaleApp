@@ -92,7 +92,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               buttonText: "Let's start >>>",
               buttonColor: const Color.fromARGB(255, 55, 9, 141),
               textColor: Colors.white, 
-              onTap: () => _submit(context),
+              onTap: () {
+                print('tapping');
+                 _submit(context);
+              }
             )
           ],
         ),
