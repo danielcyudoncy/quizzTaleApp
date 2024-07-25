@@ -3,9 +3,9 @@ class QuestionModel {
   final String question;
   final List<String> options;
 
-  QuestionModel({
-    required this.id, 
-    required this.answer, 
-    required this.question, 
-    required this.options});
+  QuestionModel(
+      {required this.id,
+      required this.answer,
+      required this.question,
+      required this.options});
 }

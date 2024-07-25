@@ -1,5 +1,5 @@
 class AppValidator {
-  static String? validateEmptyText( String? value) {
+  static String? validateEmptyText(String? value) {
     if (value == null || value.isEmpty) {
       return 'Name is required';
     }

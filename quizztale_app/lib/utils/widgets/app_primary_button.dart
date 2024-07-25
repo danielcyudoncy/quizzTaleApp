@@ -1,12 +1,13 @@
-
 import 'package:flutter/material.dart';
 import 'package:quizztale_app/utils/constant/sizes.dart';
-
 
 class AppPrimaryButton extends StatelessWidget {
   const AppPrimaryButton({
     super.key,
-    required this.buttonText, required this.buttonColor, required this.textColor, this.onTap,
+    required this.buttonText,
+    required this.buttonColor,
+    required this.textColor,
+    this.onTap,
   });
 
   final String buttonText;
@@ -20,8 +21,7 @@ class AppPrimaryButton extends StatelessWidget {
         width: double.infinity,
         height: AppSizes.buttonHeight,
         decoration: BoxDecoration(
-            color: buttonColor,
-            borderRadius: BorderRadius.circular(4)),
+            color: buttonColor, borderRadius: BorderRadius.circular(4)),
         child: Center(
             child: Text(
           buttonText,

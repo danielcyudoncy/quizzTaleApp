@@ -5,9 +5,6 @@ import 'package:quizztale_app/routes/routes.dart';
 import 'package:quizztale_app/utils/constant/sizes.dart';
 import 'package:quizztale_app/utils/widgets/app_primary_button.dart';
 
-
-
-
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});
 
@@ -23,8 +20,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     if (!_formKey.currentState!.validate()) return;
     _formKey.currentState!.save();
     Get.offAndToNamed(Routes.gameScreenRoute);
-    Get.find<QuestionController>() .startTimer();
+    Get.find<QuestionController>().startTimer();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,41 +60,40 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               height: AppSizes.spaceBtwItems,
             ),
             Form(
-              key: _formKey,
-              child: GetBuilder<QuestionController>(
-                init: Get.find<QuestionController>(),
-                builder: (controller) =>TextFormField(
-                  controller: controller.nameController,
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(
-                      borderSide:  BorderSide(width: 2),
-                      borderRadius:  BorderRadius.all(Radius.circular(8)),
-                    )
-                  ),
-                  validator: (String? val) {
-                      if(val!.isEmpty) {
+                key: _formKey,
+                child: GetBuilder<QuestionController>(
+                  init: Get.find<QuestionController>(),
+                  builder: (controller) => TextFormField(
+                    controller: controller.nameController,
+                    decoration: const InputDecoration(
+                        border: OutlineInputBorder(
+                      borderSide: BorderSide(width: 2),
+                      borderRadius: BorderRadius.all(Radius.circular(8)),
+                    )),
+                    validator: (String? val) {
+                      if (val!.isEmpty) {
                         return 'Name should not be empty';
-                      }else {return null;
+                      } else {
+                        return null;
                       }
-                     },
-                     onSaved: (newValue) {
-                       controller.name = newValue!.trim(). toUpperCase();
-                     },
-                     onFieldSubmitted: (value) => _submit(context),
-                ),
-              )),
+                    },
+                    onSaved: (newValue) {
+                      controller.name = newValue!.trim().toUpperCase();
+                    },
+                    onFieldSubmitted: (value) => _submit(context),
+                  ),
+                )),
             const SizedBox(
               height: AppSizes.spaceBtwSectionsMd,
             ),
             AppPrimaryButton(
-              buttonText: "Let's start >>>",
-              buttonColor: const Color.fromARGB(255, 55, 9, 141),
-              textColor: Colors.white, 
-              onTap: () {
-                print('tapping');
-                 _submit(context);
-              }
-            )
+                buttonText: "Let's start >>>",
+                buttonColor: const Color.fromARGB(255, 55, 9, 141),
+                textColor: Colors.white,
+                onTap: () {
+                  print('tapping');
+                  _submit(context);
+                })
           ],
         ),
       ),

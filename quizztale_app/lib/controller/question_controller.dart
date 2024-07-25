@@ -7,39 +7,46 @@ import 'package:quizztale_app/routes/routes.dart';
 class QuestionController extends GetxController {
   String name = '';
   var nameController = TextEditingController();
+  int get countOfQuestion => _questionList.length;
+  late PageController pageController;
+
+  @override
+  void onInit() {
+    pageController = PageController(initialPage: 0);
+    resetAnswer();
+
+    super.onInit();
+  }
+
   final List<QuestionModel> _questionList = [
     QuestionModel(
-      id: 1,
-      question: "What does a variable do?",
-      answer: 2,
-      options: ['Nothing', 'Stores value', 'hold an index', 'Comp']),
-
-      QuestionModel(
-        id: 2, 
-        answer: 1, 
-        question: "Best bootcamp you've attended", 
-        options: [
-          'KodeCamp BootCamp',
-          'CodeHauz BootCamp',
-          'University BootCamp',
-          'None of the above'],),
-
-      QuestionModel(
-        id: 3, 
-        answer: 1, 
-        question: "Which is not a programming langusge", 
-        options: [
-          'Java',
-          'Kotlin',
-          'C',
-          'MongoDb'
-        ],),    
+        id: 1,
+        question: "What does a variable do?",
+        answer: 2,
+        options: ['Nothing', 'Stores value', 'hold an index', 'Comp']),
+    QuestionModel(
+      id: 2,
+      answer: 1,
+      question: "Best bootcamp you've attended",
+      options: [
+        'KodeCamp BootCamp',
+        'CodeHauz BootCamp',
+        'University BootCamp',
+        'None of the above'
+      ],
+    ),
+    QuestionModel(
+      id: 3,
+      answer: 1,
+      question: "Which is not a programming langusge",
+      options: ['Java', 'Kotlin', 'C', 'MongoDb'],
+    ),
   ];
-  List<QuestionModel> get questionList => [... questionList];
+  List<QuestionModel> get questionList => [..._questionList];
   bool _isPressed = false;
   bool get isPresssed => _isPressed;
 
-  final double _numberOfQuestions = 1;
+  double _numberOfQuestions = 1;
   double get numberOfQuestions => _numberOfQuestions;
 
   int? _selectedAnswer;
@@ -65,39 +72,64 @@ class QuestionController extends GetxController {
     _isPressed = true;
     _selectedAnswer = selectedAnswer;
     _correctAnswer = questionModel.answer;
-    if(_correctAnswer ==_selectedAnswer) {
+    if (_correctAnswer == _selectedAnswer) {
       _countOfCorrectAnswers++;
     }
     stopTimer();
-    _questionIsAnswered.update(questionModel.id, (value) => true,);
-    
-    Future.delayed(const Duration(microseconds: 500)).then((value) => nextQuestion(),);
+    _questionIsAnswered.update(
+      questionModel.id,
+      (value) => true,
+    );
+
+    Future.delayed(const Duration(microseconds: 500)).then(
+      (value) => nextQuestion(),
+    );
     update();
   }
 
   //check if the question has been answered
   bool checkIsQuestionAnswered(int questionId) {
-    return _questionIsAnswered.entries.firstWhere((element) => element.key ==questionId,) .value;
+    return _questionIsAnswered.entries
+        .firstWhere(
+          (element) => element.key == questionId,
+        )
+        .value;
   }
 
   void startTimer() {
     resetTimer();
-    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      if(sec.value > 0) {
-        sec.value --;
-      }
-      else {
-        stopTimer();
-        nextQuestion();
-      }
-    },);
+    _timer = Timer.periodic(
+      const Duration(seconds: 1),
+      (timer) {
+        if (sec.value > 0) {
+          sec.value--;
+        } else {
+          stopTimer();
+          nextQuestion();
+        }
+      },
+    );
   }
-  
+
   void resetTimer() => sec.value = maxSec;
-  
+
   void stopTimer() => _timer?.cancel();
-  
-  void nextQuestion() {}
+
+  void nextQuestion() {
+    if (_timer != null || _timer!.isActive) {
+      stopTimer();
+    }
+    if (pageController.page == _questionList.length - 1) {
+      Get.offAndToNamed(Routes.gameStatusRoute);
+    } else {
+      _isPressed = false;
+      pageController.nextPage(
+          duration: const Duration(milliseconds: 5000), curve: Curves.linear);
+      startTimer();
+    }
+    _numberOfQuestions = pageController.page! + 2;
+    update();
+  }
 
   void resetAnswer() {
     for (var element in _questionList) {
@@ -112,5 +144,17 @@ class QuestionController extends GetxController {
     resetAnswer();
     _selectedAnswer = null;
     Get.offAllNamed(Routes.welcomeScreenRoute);
+  }
+
+  Color getColor(int answerIndex) {
+    if (_isPressed) {
+      if (answerIndex == _correctAnswer) {
+        return Colors.green.shade600;
+      } else if (answerIndex == selectedAnswer &&
+          _correctAnswer != _selectedAnswer) {
+        return Colors.red.shade600;
+      }
+    }
+    return Colors.white;
   }
 }
