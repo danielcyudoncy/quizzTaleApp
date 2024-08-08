@@ -6,7 +6,7 @@ import 'package:quizztale_app/utils/widgets/progress_timer.dart';
 import 'package:quizztale_app/utils/widgets/question_widget.dart'; // Ensure this import is correct
 
 class GameScreen extends StatelessWidget {
-  const GameScreen({Key? key}) : super(key: key);
+  const GameScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
